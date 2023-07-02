@@ -15,10 +15,24 @@
     
 ZODWorks.Player = {}
 
----Get the player data
+--- Get the player data
 ---@return table
 function ZODWorks.Player:getData()
     return ESX.GetPlayerData()
+end
+
+--- Withdraw some money from account bank.
+---@param amount number The value of the withdraw.
+---@param atmlist table The all of ATM coords (Security but optionnal).
+function ZODWorks.Player:withdrawMoney(amount, atmlist)
+    TriggerServerEvent("zod::withdrawMoney", amount, atmlist or nil)
+end
+
+--- Deposit some money from account bank.
+---@param amount number The value of the withdraw.
+---@param atmlist table The all of ATM coords (Security but optionnal).
+function ZODWorks.Player:depositMoney(amount, atmlist)
+    TriggerServerEvent("zod::depositMoney", amount, atmlist or nil)
 end
 
 --- Get the player indentity.

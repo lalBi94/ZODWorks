@@ -29,12 +29,16 @@ client_scripts {
     "client/Game/Game.lua",
 }
 
+shared_scripts {
+    "@es_extended/imports.lua"
+}
+
 server_scripts {
-    "config.lua"
+    "locales/locales.lua",
+    "config.lua",
+    "server/Player/Player.lua"
 }
 
 exports {
     "getSharedObject"
 }
-
-shared_script '@es_extended/imports.lua'
