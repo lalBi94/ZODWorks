@@ -15,15 +15,23 @@
     
 ZODWorks.Player = {}
 
---- Get the player data
+--- Get the player data.
 ---@return table
 function ZODWorks.Player:getData()
     return ESX.GetPlayerData()
 end
 
+--- Send ESX notify.
+---@param msg string The message.
+---@return void
+function ZODWorks.Player:notify(msg)
+    ESX.ShowNotification(msg)
+end
+
 --- Withdraw some money from account bank.
 ---@param amount number The value of the withdraw.
 ---@param atmlist table The all of ATM coords (Security but optionnal).
+---@return void
 function ZODWorks.Player:withdrawMoney(amount, atmlist)
     TriggerServerEvent("zod::withdrawMoney", amount, atmlist or nil)
 end
@@ -56,11 +64,11 @@ function ZODWorks.Player:getMoneyFrom(account)
     local ply = ZODWorks.Player:getData().accounts
 
     if(account == "cash") then
-        return ply[2].money
+        return ply[3].money
     elseif account == "dirty_cash" then
         return ply[1].money
     elseif account == "bank" then
-        return ply[3].money
+        return ply[2].money
     else
         return nil
     end
@@ -72,8 +80,8 @@ function ZODWorks.Player:getMoneys()
     local ply = ZODWorks.Player:getData().accounts
 
     return {
-        bank = ply[3].money,
-        cash = ply[2].money,
+        bank = ply[2].money,
+        cash = ply[3].money,
         dirty_cash = ply[1].money,
     }
 end

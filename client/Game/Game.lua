@@ -15,7 +15,12 @@
 
 ZODWorks.Game = {}
 
----@title 3D Text
+--- Send a help notify to client (in top-left of screen)
+---@param msg string The message content.
+function ZODWorks.Game:helpNotify(msg)
+    AddTextEntry(msg, msg)
+    DisplayHelpTextThisFrame(msg, false)
+end
 
 --- Create a 3d Text.
 ---@param text string The showed message.
@@ -37,9 +42,6 @@ function ZODWorks.Game:create3dText(text, coords, color, size, center)
     DrawRect(0.0, 0.0 + 0.0125, 0.017 + factor, 0.03, 0, 0, 0, 75)
     ClearDrawOrigin()
 end
-
-
----@title Marker
 
 --- Create a marker on the map.
 ---@param id number The marker type.
