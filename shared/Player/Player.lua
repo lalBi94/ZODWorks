@@ -12,8 +12,8 @@
     THIS SCRIPT IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT 
     LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 ]]--
-    
-ZODWorks.Player = {}
+
+ZODWorks.Player = ZODWorks.Player or {}
 
 --- Teleport the player in coords.
 ---@param coords vector3 The destination.
@@ -134,3 +134,5 @@ end
 function ZODWorks.Player:getJob()
     return ZODWorks.Player:getData().job
 end
+
+setmetatable(ZODWorks, {__index, ZODWorks.Player})

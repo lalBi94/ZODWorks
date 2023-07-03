@@ -13,7 +13,8 @@
     LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 ]]--
 
-ZODWorks.KRPBank = {}
+ZODWorks = ZODWorks or {}
+ZODWorks.KRPBank = ZODWorks.KRPBank or {}
 
 --- Withdraw some money from account bank.
 ---@param amount number The value of the withdraw.
@@ -29,3 +30,5 @@ end
 function ZODWorks.KRPBank:depositMoney(amount, atmlist)
     ZODWorks.Game:Trigger("zod::depositMoney", amount, atmlist or nil)
 end
+
+setmetatable(ZODWorks, {__index, ZODWorks.KRPBank})

@@ -25,7 +25,7 @@ ESX = exports["es_extended"]:getSharedObject()
 
 ---@class
 ---@version 1.0
-ZODWorks = {}
+ZODWorks = ZODWorks or {}
 
 --- Get the ZODWorks object
 ---@return table

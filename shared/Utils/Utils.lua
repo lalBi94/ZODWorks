@@ -13,7 +13,7 @@
     LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 ]]--
 
-ZODWorks.Utils = {}
+ZODWorks.Utils = ZODWorks.Utils or {}
 
 --- Format a number to currency
 ---@param amount string The string to convert to currency
@@ -92,3 +92,5 @@ function ZODWorks.Utils:tableContainsValue(t, value)
 
     return false
 end
+
+setmetatable(ZODWorks, {__index, ZODWorks.Utils})

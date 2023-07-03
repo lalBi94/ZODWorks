@@ -28,7 +28,7 @@ client_scripts {
     "shared/Game/Game.lua",
 
     -- ADD-ONS
-    "shared/AddOns/**/*"
+    "shared/AddOns/**/*.lua"
 }
 
 shared_scripts {

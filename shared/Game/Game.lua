@@ -13,7 +13,7 @@
     LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 ]]--
 
-ZODWorks.Game = {}
+ZODWorks.Game = ZODWorks.Game or {}
 
 --- Send a help notify to client (in top-left of screen)
 ---@param msg string The message content.
@@ -94,3 +94,5 @@ end
 function ZODWorks.Game:deleteBlip(blip)
     RemoveBlip(blip)
 end
+
+setmetatable(ZODWorks, {__index, ZODWorks.Game})
