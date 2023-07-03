@@ -14,3 +14,11 @@
 ]]--
     
 Config = {}
+
+Config.Moneys = {
+    types = {
+        bank = "bank",
+        black_cash = "black_cash",
+        cash = "cash"
+    }
+}

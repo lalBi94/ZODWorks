@@ -15,33 +15,3 @@
 
 CurrentLocale = "fr"
 Locales = {}
-
-Locales.pets = {
-    wrong = {
-        ["fr"] = "%s n'est pas repertorie !",
-        ["en"] = "%s doesn't exist!"
-    }, succes = {
-        ["fr"] = "%s vient d'apparaitre a cote de toi !",
-        ["en"] = "%s appeared next to you"
-    }
-}
-
-Locales.withdrawMoney = {
-    wrong = {
-        ["fr"] = "~r~Vous n'avez pas d'argent sur votre compte !",
-        ["en"] = "~r~You dont have enought money in your bank!"
-    }, succes = {
-        ["fr"] = "~g~Vous venez de retirer %d$ !",
-        ["en"] = "~g~You have just withdrawn %d$!"
-    }
-}
-
-Locales.depositMoney = {
-    wrong = {
-        ["fr"] = "~r~Vous n'avez pas d'argent sur vous !",
-        ["en"] = "~r~You dont have enought money on you!"
-    }, succes = {
-        ["fr"] = "~g~Vous venez de deposer %d$ !",
-        ["en"] = "~g~You have just deposited %d$!"
-    }
-}

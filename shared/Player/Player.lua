@@ -28,21 +28,6 @@ function ZODWorks.Player:notify(msg)
     ESX.ShowNotification(msg)
 end
 
---- Withdraw some money from account bank.
----@param amount number The value of the withdraw.
----@param atmlist table The all of ATM coords (Security but optionnal).
----@return void
-function ZODWorks.Player:withdrawMoney(amount, atmlist)
-    TriggerServerEvent("zod::withdrawMoney", amount, atmlist or nil)
-end
-
---- Deposit some money from account bank.
----@param amount number The value of the withdraw.
----@param atmlist table The all of ATM coords (Security but optionnal).
-function ZODWorks.Player:depositMoney(amount, atmlist)
-    TriggerServerEvent("zod::depositMoney", amount, atmlist or nil)
-end
-
 --- Get the player indentity.
 ---@return table
 function ZODWorks.Player:getIndentity()
@@ -57,33 +42,45 @@ function ZODWorks.Player:getIndentity()
     }
 end
 
+--- To restructure the ESX.GetAccounts.
+function privateMoneyObjectCreator()
+    local ply = ZODWorks.Player:getData().accounts
+    local obj = {}
+
+    for i=1, #ply do
+        local cur = ply[i]
+
+        if(cur.name == Config.Moneys.types.bank) then
+            obj.bank = cur.money
+        elseif cur.name == Config.Moneys.types.cash then
+            obj.cash = cur.money
+        elseif cur.name == Config.Moneys.types.black_cash then
+            obj.black_cash = cur.money
+        end
+    end
+
+    return obj
+end
+
 --- Get the players account
 ---@param account string { black_cash, cash, bank }
 ---@return number
 function ZODWorks.Player:getMoneyFrom(account)
-    local ply = ZODWorks.Player:getData().accounts
+    local obj = privateMoneyObjectCreator()
 
-    if(account == "cash") then
-        return ply[3].money
-    elseif account == "dirty_cash" then
-        return ply[1].money
-    elseif account == "bank" then
-        return ply[2].money
-    else
-        return nil
+    if(account == Config.Moneys.types.cash) then
+        return obj.cash
+    elseif account == Config.Moneys.types.black_cash then
+        return obj.black_cash
+    elseif account == Config.Moneys.types.bank then
+        return obj.bank
     end
 end
 
 --- Get the players accounts
----@return table { bank, cash, dirty_cash }
+---@return table { bank, dirty_cash, cash }
 function ZODWorks.Player:getMoneys()
-    local ply = ZODWorks.Player:getData().accounts
-
-    return {
-        bank = ply[2].money,
-        cash = ply[3].money,
-        dirty_cash = ply[1].money,
-    }
+    return privateMoneyObjectCreator()
 end
 
 --- Get coordonates.
@@ -100,8 +97,10 @@ function ZODWorks.Player:getInventory()
     local ply = ZODWorks.Player:getData().inventory
     local newobj = {}
 
-    for _, v in pairs(ply) do
-        if(v.count > 0) then
+    for i = 1, #ply do
+        local v = ply[i]
+
+        if v.count > 0 then
             table.insert(newobj, {
                 name = v.name,
                 canRemove = v.canRemove,

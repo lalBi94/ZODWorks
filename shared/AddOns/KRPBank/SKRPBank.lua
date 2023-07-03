@@ -1,7 +1,7 @@
 -- Author: General Zod (Owner)
 -- Discord: bilaaaaaaaaaal
 -- Date: written on 02/07/2023 at 07:06
--- Name: [Zod]/ZODWorks/server/Player/Player.lua
+-- Name: [Zod]/ZODWorks/shared/AddOns/KRPBank/SKRPBank.lua
 
 --[[
     Non-Commercial Script License
@@ -26,9 +26,9 @@ RegisterNetEvent("zod::withdrawMoney", function(amount, atmlist)
     if(amount <= curBalance) then
         xPlayer.removeAccountMoney("bank", amount)
         xPlayer.addAccountMoney("money", amount)
-        xPlayer.showNotification((Locales.withdrawMoney.succes[CurrentLocale]):format(amount))
+        xPlayer.showNotification((Locales.KRPBank.texts.withdrawMoney.succes[CurrentLocale]):format(amount))
     else
-        xPlayer.showNotification((Locales.depositMoney.wrong[CurrentLocale]):format(amount))
+        xPlayer.showNotification((Locales.KRPBank.texts.withdrawMoney.wrong[CurrentLocale]):format(amount))
     end
 end)
 
@@ -38,13 +38,13 @@ end)
 RegisterNetEvent("zod::depositMoney", function(amount, atmlist)
     local _src = source
     local xPlayer = ESX.GetPlayerFromId(_src)
-    local curBalance = xPlayer.getAccount("bank").money
+    local curBalance = xPlayer.getAccount("money").money
 
     if(amount <= curBalance) then
         xPlayer.removeAccountMoney("money", amount)
         xPlayer.addAccountMoney("bank", amount)
-        xPlayer.showNotification((Locales.depositMoney.succes[CurrentLocale]):format(amount))
+        xPlayer.showNotification((Locales.KRPBank.texts.depositMoney.succes[CurrentLocale]):format(amount))
     else
-        xPlayer.showNotification((Locales.depositMoney.wrong[CurrentLocale]):format(amount))
+        xPlayer.showNotification((Locales.KRPBank.texts.depositMoney.wrong[CurrentLocale]):format(amount))
     end
 end)

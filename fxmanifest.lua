@@ -6,7 +6,6 @@ description ""
 
 client_scripts {
     -- Locales
-    -- Locales
     "locales/locales.lua",
 
     -- RageUI
@@ -22,11 +21,14 @@ client_scripts {
 
     -- Client
     "config.lua",
-    "client/ZODWorks.lua",
-    "client/Debug/Debug.lua",
-    "client/Utils/Utils.lua",
-    "client/Player/Player.lua",
-    "client/Game/Game.lua",
+    "shared/ZODWorks.lua",
+    "shared/Debug/Debug.lua",
+    "shared/Utils/Utils.lua",
+    "shared/Player/Player.lua",
+    "shared/Game/Game.lua",
+
+    -- ADD-ONS
+    "shared/AddOns/**/*"
 }
 
 shared_scripts {
@@ -34,9 +36,15 @@ shared_scripts {
 }
 
 server_scripts {
+    -- SQL
+    '@oxmysql/lib/MySQL.lua',
+
+    -- Locales
     "locales/locales.lua",
     "config.lua",
-    "server/Player/Player.lua"
+
+    -- ADD-ONS
+    "shared/AddOns/**/*"
 }
 
 exports {
