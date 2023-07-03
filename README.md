@@ -3,7 +3,7 @@
 - **OXMySQL** (https://overextended.dev/oxmysql#installation).
 
 ### Installation
-1. Download this repository: https://github.com/lalBi94/ZODWorks.
+1. Download this repository: https://github.com/lalBi94/ZODWorks/archive/refs/heads/master.zip.
 2. Add this line to your `resources.cfg` file. (You can also start your core).
 ```cfg
 ensure ZODWorks
