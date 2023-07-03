@@ -60,4 +60,4 @@ print(fusionString) -- Onde Folie
 ### Credit
 Owner → General Zod (bilaaaaaaaaaal) <br/>
 Discord → https://discord.gg/xpCc6XmUaX <br/>
-Version → 1.0
+Version → BETA
