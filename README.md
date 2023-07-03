@@ -30,10 +30,10 @@ print(currencyCovert) -- 75 900$
 ```
 
 ### Add-Ons
-You can add your own **functions or triggers** by placing them in `AddOns/`. Ideally, :
-- `AddOns/<YOUR_SCRIPT>/locales/locales.lua` (to add some langages)
-- `AddOns/<YOUR_SCRIPT>/server-side.lua`
-- `AddOns/<YOUR_SCRIPT>/client-side.lua`
+You can add your own **functions or triggers** by placing them in `ZODWorks/shared/AddOns/`. Ideally, :
+- `ZODWorks/shared/AddOns/<YOUR_SCRIPT>/locales/locales.lua` (to add some langages)
+- `ZODWorks/shared/AddOns/<YOUR_SCRIPT>/server-side.lua`
+- `ZODWorks/shared/AddOns/<YOUR_SCRIPT>/client-side.lua`
 
 Exemple : <br/>
 `ZODWorks/shared/AddOns/myCustomScript/myCustomScript.lua`
