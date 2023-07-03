@@ -23,10 +23,10 @@ local ZODWorks = exports["ZODWorks"]:getSharedObject()
 3. You can now use all available functions. Exemple :
 ```lua
 local myMoney = ZODWorks.Player:getMoneyFrom("bank") 
-local currencyCovert = ZODWorks.Utils:formatCurrency(tostring(myMoney))
+local currencyConvert = ZODWorks.Utils:formatCurrency(tostring(myMoney))
 
 print(myMoney) -- 75900
-print(currencyCovert) -- 75 900$
+print(currencyConvert) -- 75 900$
 ```
 
 ### Add-Ons
