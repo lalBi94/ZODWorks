@@ -16,7 +16,7 @@ shared_scripts {
     "@ZODWorks/shared/ZODWorks.lua"
 }
 ```
-2. Now store the framework in a variable.
+2. Now store the tool in a variable.
 ```lua
 local ZODWorks = exports["ZODWorks"]:getSharedObject()
 ```
