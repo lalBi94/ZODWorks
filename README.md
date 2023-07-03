@@ -38,6 +38,7 @@ You can add your own **functions or triggers** by placing them in `ZODWorks/shar
 Exemple : <br/>
 `ZODWorks/shared/AddOns/myCustomScript/myCustomScript.lua`
 ```lua
+ZODWorks = ZODWorks or {} -- To supress the error "Attempt to call a nil value"
 ZODWorks.myCustomScript = {}
 
 ---@param str1 string The first string.
@@ -46,6 +47,8 @@ ZODWorks.myCustomScript = {}
 function ZODWorks.myCustomScript:stringFusion(str1, str2) 
     return ("%s %s"):format(str1, str2)
 end
+
+setmetatable(ZODWorks, {__index = ZODWorks.myCustomScript})
 ```
 
 `[myCore]/myCustomScript/client.lua`
