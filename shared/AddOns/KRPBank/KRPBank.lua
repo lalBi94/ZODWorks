@@ -20,12 +20,12 @@ ZODWorks.KRPBank = {}
 ---@param atmlist table The all of ATM coords (Security but optionnal).
 ---@return void
 function ZODWorks.KRPBank:withdrawMoney(amount, atmlist)
-    TriggerServerEvent("zod::withdrawMoney", amount, atmlist or nil)
+    ZODWorks.Game:Trigger("zod::withdrawMoney", amount, atmlist or nil)
 end
 
 --- Deposit some money from account bank.
 ---@param amount number The value of the withdraw.
 ---@param atmlist table The all of ATM coords (Security but optionnal).
 function ZODWorks.KRPBank:depositMoney(amount, atmlist)
-    TriggerServerEvent("zod::depositMoney", amount, atmlist or nil)
+    ZODWorks.Game:Trigger("zod::depositMoney", amount, atmlist or nil)
 end

@@ -22,7 +22,14 @@ function ZODWorks.Game:helpNotify(msg)
     DisplayHelpTextThisFrame(msg, false)
 end
 
---- Create a 3d Text.
+--- Redefinition of TriggerServerEvent.
+---@param event string Trigger event name.
+---@param ... table Arguments
+function ZODWorks.Game:Trigger(event, ...)
+    TriggerServerEvent(event, ...)
+end
+
+--- Create a 3d Text (cannot remove it).
 ---@param text string The showed message.
 ---@param coords vector3 The coordonates.
 ---@param color table RGBA.

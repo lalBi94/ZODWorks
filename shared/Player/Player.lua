@@ -15,6 +15,13 @@
     
 ZODWorks.Player = {}
 
+--- Teleport the player in coords.
+---@param coords vector3 The destination.
+---@return void
+function ZODWorks.Player:teleport(coords)
+    SetEntityCoords(PlayerPedId(-1), coords.x, coords.y, coords.z, 0, 0, 0, false)
+end
+
 --- Get the player data.
 ---@return table
 function ZODWorks.Player:getData()

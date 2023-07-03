@@ -29,13 +29,13 @@ end)
 ---@param name string The pet name.
 function ZODWorks.KRPPets:addPetToPlayer(pet, name)
     local identifier = ESX.GetPlayerData().identifier
-    TriggerServerEvent("zod::addPetToPlayer", identifier, pet, name)
+    ZODWorks.Game:Trigger("zod::addPetToPlayer", identifier, pet, name)
 end
 
 --- Get the player pets list
 function ZODWorks.KRPPets:getPetsList()
     local identifier = ESX.GetPlayerData().identifier
-    TriggerServerEvent("zod::getPetsList", identifier)
+    ZODWorks.Game:Trigger("zod::getPetsList", identifier)
 
     while(PetsList == nil) do
         Wait(0)
@@ -101,15 +101,6 @@ function ZODWorks.KRPPets:spawnPet(race, name)
     TaskGoToEntity(pet, me, -1, 200, 100.0, 1073741824, 0)
     SetPedMoveRateOverride(pet, 22.50)
 
-    Citizen.CreateThread(function()
-        while(true) do
-            local coordspet = GetEntityCoords(pet)
-            ZODWorks.Game:create3dText(name, vector3(coordspet.x, coordspet.y, coordspet.z + 0.5),
-                    { r = 255, g = 255, b = 255, a = 255 }, 4, true)
-            Citizen.Wait(1)
-        end
-    end)
-
     ESX.ShowNotification((Locales.KRPPets.texts.succes[CurrentLocale]):format(name))
-    return {pet = pet}
+    return pet
 end
