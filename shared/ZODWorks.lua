@@ -29,8 +29,10 @@ ZODWorks = ZODWorks or {}
 
 --- Get the ZODWorks object
 ---@return table
-function getSharedObject()
+function ZODWorks:getSharedObject()
     return ZODWorks
 end
 
-exports("getSharedObject", getSharedObject)
+setmetatable(ZODWorks, {__index, getSharedObject})
+
+exports("getSharedObject", ZODWorks.getSharedObject)

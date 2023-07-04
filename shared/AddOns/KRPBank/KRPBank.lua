@@ -27,8 +27,26 @@ end
 --- Deposit some money from account bank.
 ---@param amount number The value of the withdraw.
 ---@param atmlist table The all of ATM coords (Security but optionnal).
+---@return void
 function ZODWorks.KRPBank:depositMoney(amount, atmlist)
     ZODWorks.Game:Trigger("zod::depositMoney", amount, atmlist or nil)
+end
+
+--- Check if play have account and create one if not
+---@return void
+function ZODWorks.KRPBank:haveAccount()
+    ZODWorks.Game:Trigger("zod::haveAccount")
+end
+
+--- Check if the player have a pending transfer
+---@return void
+function ZODWorks.KRPBank:checkPendingTransfer()
+    ZODWorks.Game:Trigger("zod::checkPendingTransfer")
+end
+
+--- Add a pending transfert for a player
+function ZODWorks.KRPBank:addPendingTransfert(naccount, amount, emmiter)
+    ZODWorks.Game:Trigger("zod::addPendingTransfert", naccount, amount, emmiter)
 end
 
 setmetatable(ZODWorks, {__index, ZODWorks.KRPBank})

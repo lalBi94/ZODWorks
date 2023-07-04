@@ -29,6 +29,11 @@ function ZODWorks.Game:Trigger(event, ...)
     TriggerServerEvent(event, ...)
 end
 
+--- Redefinition of getClosestObject (no originality yes but 0 ESX import in script)
+function ZODWorks.Game:getClosestObject()
+    return ESX.Game.GetClosestObject()
+end
+
 --- Create a 3d Text (cannot remove it).
 ---@param text string The showed message.
 ---@param coords vector3 The coordonates.

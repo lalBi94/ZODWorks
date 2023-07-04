@@ -36,3 +36,18 @@ Locales.KRPBank.texts.withdrawMoney = {
         ["en"] = "~g~You have just withdrawn %d$!"
     }
 }
+
+Locales.KRPBank.texts.checkPendingTransfer = {
+    ["fr"] = "%s vient de vous envoyer %s$",
+    ["en"] = "%s send you %s$"
+}
+
+Locales.KRPBank.texts.addPendingTransfert = {
+    wrong = {
+        ["fr"] = "Vous n'avez pas assez d'argent sur votre compte pour effectue un tranfert !",
+        ["en"] = "You don't have enought money in your bank account to make this transfer!"
+    }, succes = {
+        ["fr"] = "Votre transfert de %s$ envers le compte %s a bien ete effectue !",
+        ["en"] = "Your transfer of %s$ for %s was succesfully send!"
+    }
+}

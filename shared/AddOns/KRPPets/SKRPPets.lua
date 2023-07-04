@@ -17,7 +17,7 @@ RegisterNetEvent("zod::getPetsList", function(identifier)
     local _src = source
 
     MySQL.Async.fetchAll(
-            "SELECT `pet`, `name` FROM krp_pets WHERE identifier=@i", {["i"] = identifier},
+            "SELECT `pet`, `name` FROM `krp_pets` WHERE identifier=@i", {["i"] = identifier},
             function(data)
                 if(data) then
                     TriggerClientEvent("zod:receivePetsList", _src, data)
