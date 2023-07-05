@@ -19,7 +19,7 @@ Locales.KRPBank.texts = {}
 
 Locales.KRPBank.texts.depositMoney = {
     wrong = {
-        ["fr"] = "~r~Vous n'avez pas d'argent sur vous !",
+        ["fr"] = "~r~Vous n'avez pas assez d'argent sur vous !",
         ["en"] = "~r~You dont have enought money on you!"
     }, succes = {
         ["fr"] = "~g~Vous venez de deposer %d$ !",
@@ -29,7 +29,7 @@ Locales.KRPBank.texts.depositMoney = {
 
 Locales.KRPBank.texts.withdrawMoney = {
     wrong = {
-        ["fr"] = "~r~Vous n'avez pas d'argent sur votre compte !",
+        ["fr"] = "~r~Vous n'avez pas assez d'argent sur votre compte !",
         ["en"] = "~r~You dont have enought money in your bank!"
     }, succes = {
         ["fr"] = "~g~Vous venez de retirer %d$ !",
@@ -47,7 +47,7 @@ Locales.KRPBank.texts.addPendingTransfert = {
         ["fr"] = "Vous n'avez pas assez d'argent sur votre compte pour effectue un tranfert !",
         ["en"] = "You don't have enought money in your bank account to make this transfer!"
     }, succes = {
-        ["fr"] = "Votre transfert de %s$ envers le compte %s a bien ete effectue !",
-        ["en"] = "Your transfer of %s$ for %s was succesfully send!"
+        ["fr"] = "Votre transfert de %s$ a bien ete effectue !",
+        ["en"] = "Your transfer of %s$ was succesfully send!"
     }
 }

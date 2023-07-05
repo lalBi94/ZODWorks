@@ -15,8 +15,8 @@
 
 ZODWorks = ZODWorks or {}
 ZODWorks.KRPPets = ZODWorks.KRPPets or {}
-PetsList = nil
 
+PetsList = nil
 RegisterNetEvent("zod:receivePetsList", function(data)
     PetsList = data
 end)
@@ -28,21 +28,25 @@ end)
 --- Add a pet to a player.
 ---@param pet string The pet identifier.
 ---@param name string The pet name.
+---@return void
 function ZODWorks.KRPPets:addPetToPlayer(pet, name)
-    local identifier = ESX.GetPlayerData().identifier
-    ZODWorks.Game:Trigger("zod::addPetToPlayer", identifier, pet, name)
+    ZODWorks.Game:Trigger("zod::addPetToPlayer", pet, name)
 end
 
 --- Get the player pets list
+---@return table
 function ZODWorks.KRPPets:getPetsList()
-    local identifier = ESX.GetPlayerData().identifier
-    ZODWorks.Game:Trigger("zod::getPetsList", identifier)
+    if(PetsList ~= nil) then
+        return PetsList
+    else
+        ZODWorks.Game:Trigger("zod::getPetsList")
 
-    while(PetsList == nil) do
-        Wait(0)
+        while(PetsList == nil) do
+            Wait(0)
+        end
+    
+        return PetsList
     end
-
-    return PetsList
 end
 
 --- Spawn a pet

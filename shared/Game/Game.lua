@@ -57,7 +57,7 @@ end
 
 --- Create a marker on the map.
 ---@param id number The marker type.
----@param coords vector3 The coords of the marker.
+---@param coords vector4 The coords of the marker.
 ---@param color table RGBA.
 ---@param canJump number false = 0, true = 1 (OPTIONNAL).
 ---@param canRotate number false = 0, true = 1 (OPTIONNAL).

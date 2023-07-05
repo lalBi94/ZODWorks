@@ -15,6 +15,58 @@
 
 ZODWorks.Player = ZODWorks.Player or {}
 
+--- Get coordonates.
+---@param vect4 boolean Return a vector4 value (+heading) OPTIONNAL
+---@return vector3, vector4
+function ZODWorks.Player:getCoords(vect4)
+    local coords = GetEntityCoords(PlayerPedId(-1))
+
+    if(vect4) then
+        local h = GetEntityHeading(PlayerPedId(-1))
+        return vector4(coords.x, coords.y, coords.z, h)
+    else
+        return vector3(coords.x, coords.y, coords.z)
+    end
+end
+
+--- Player do an animation
+---@param dictionary string The dictionnary of your anim.
+---@param name string The name.
+---@return void
+function ZODWorks.Player:doAnimation(dictionary, name)
+    Citizen.CreateThread(function()
+        RequestAnimDict(dictionary)
+        while (not HasAnimDictLoaded(dictionary)) do
+            Citizen.Wait(0)
+        end
+
+        local player = PlayerPedId(-1)
+        TaskPlayAnim(player, dictionary, name, 8.0, 8.0, 3000, 48, 1, false, false, false)
+        FreezeEntityPosition(player, true)
+    end)
+end
+
+--- Stop an animation
+---@return void
+function ZODWorks.Player:stopAnimation()
+    local player = PlayerPedId(-1)
+    FreezeEntityPosition(player, false)
+end
+
+--- Get coordonates.
+---@param vect4 boolean Return a vector4 value (+heading) OPTIONNAL
+---@return vector3, vector4
+function ZODWorks.Player:getCoords(vect4)
+    local coords = GetEntityCoords(PlayerPedId(-1))
+
+    if(vect4) then
+        local h = GetEntityHeading(PlayerPedId(-1))
+        return vector4(coords.x, coords.y, coords.z, h)
+    else
+        return vector3(coords.x, coords.y, coords.z)
+    end
+end
+
 --- Teleport the player in coords.
 ---@param coords vector3 The destination.
 ---@return void
@@ -88,14 +140,6 @@ end
 ---@return table { bank, dirty_cash, cash }
 function ZODWorks.Player:getMoneys()
     return privateMoneyObjectCreator()
-end
-
---- Get coordonates.
----@return vector3
-function ZODWorks.Player:getCoords()
-    local coords = GetEntityCoords(PlayerPedId(-1))
-    local h = GetEntityHeading(PlayerPedId(-1))
-    return vector4(coords.x, coords.y, coords.z, h)
 end
 
 --- Get only the items who player have.

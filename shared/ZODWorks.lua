@@ -13,14 +13,6 @@
     LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 ]]--
 
-Citizen.CreateThread(function()
-    print("^1┌--------------------------------------┐")
-    print("^1|^6 Author: bilaaaaaaaaaal ^7(General ^3Zod^7) ^1|")
-    print("^1|^7 Version: ^51.0                         ^1|")
-    print("^1|^3 ZODWorks ^2started...                  ^1|")
-    print("^1└--------------------------------------┘")
-end)
-
 ESX = exports["es_extended"]:getSharedObject()
 
 ---@class

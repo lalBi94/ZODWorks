@@ -81,6 +81,7 @@ end
 RegisterNetEvent("zod::haveAccount", function()
     local _src = source
     local xPlayer = ESX.GetPlayerFromId(_src)
+
     local identifier = xPlayer.identifier
 
     MySQL.Async.fetchAll("SELECT `identifier` FROM krp_bank WHERE identifier=@i", {["i"] = identifier},
@@ -96,8 +97,12 @@ RegisterNetEvent("zod::haveAccount", function()
 
                         uniqueId = genAccountID(allID)
 
-                        MySQL.Async.execute("INSERT INTO `krp_bank` VALUES(@i, @g)", {["i"] = identifier, ["g"] = uniqueId},
-                                function() end)
+                        MySQL.Async.execute(
+                            "INSERT INTO `krp_bank` VALUES(@i, @g, @p, @b)", {
+                                ["i"] = identifier, 
+                                ["g"] = uniqueId, 
+                                ["p"] = 0, ["b"] = nil
+                            }, function() end)
                     end
                 )
             end
@@ -121,8 +126,11 @@ RegisterNetEvent("zod::checkPendingTransfer", function()
                     xPlayer.showNotification((Locales.KRPBank.texts.checkPendingTransfer[CurrentLocale]):format(emitter, pending))
 
                     MySQL.Async.execute(
-                            "UPDATE `krp_bank` SET pendingTransfer=@pt, emmiter=@e WHERE identifier=@i",
-                            {["pt"] = 0, ["e"] = nil, ["i"] = identifier}, function() end
+                        "UPDATE `krp_bank` SET pendingTransfer=@pt, emmiter=@e WHERE identifier=@i",{
+                            ["pt"] = 0, 
+                            ["e"] = nil, 
+                            ["i"] = identifier
+                        }, function() end
                     )
                 end
             end)
@@ -136,13 +144,32 @@ RegisterNetEvent("zod::addPendingTransfert", function(naccount, amount, emmiter)
 
     if(amount <= curBalance) then
         MySQL.Async.execute(
-                "UPDATE `krp_bank` SET pendingTransfer=@pt, emmiter=@e WHERE naccount=@na",
-                {["pt"] = amount, ["e"] = emmiter, ["na"] = naccount}, function()
-                    xPlayer.removeAccountMoney("bank", amount)
-                    xPlayer.showNotification((Locales.KRPBank.texts.addPendingTransfert.succes[CurrentLocale]):format(amount, emmiter))
-                end
+            "UPDATE `krp_bank` SET pendingTransfer=@pt, emmiter=@e WHERE naccount=@na",
+            {
+                ["pt"] = amount, 
+                ["e"] = emmiter, 
+                ["na"] = naccount
+            }, function()
+                xPlayer.removeAccountMoney("bank", amount)
+                xPlayer.showNotification((Locales.KRPBank.texts.addPendingTransfert.succes[CurrentLocale]):format(amount, emmiter))
+            end
         )
     else
         xPlayer.showNotification(Locales.KRPBank.texts.addPendingTransfert.wrong[CurrentLocale])
     end
+end)
+
+RegisterNetEvent("zod::getAccountId", function() 
+    local _src = source
+    local xPlayer = ESX.GetPlayerFromId(_src)
+    local identifier = xPlayer.identifier
+
+    MySQL.Async.fetchAll(
+        "SELECT `naccount` FROM `krp_bank` WHERE identifier=@i", {
+            ["i"] = identifier
+        }, function(data) 
+            local naccount = data[1].naccount
+            TriggerClientEvent("zod::receiveAccountId", _src, naccount)
+        end
+    )
 end)

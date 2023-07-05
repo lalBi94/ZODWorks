@@ -16,12 +16,33 @@
 ZODWorks = ZODWorks or {}
 ZODWorks.KRPBank = ZODWorks.KRPBank or {}
 
+AccountId = nil
+RegisterNetEvent("zod::receiveAccountId", function(data)
+    AccountId = data
+end)
+
 --- Withdraw some money from account bank.
 ---@param amount number The value of the withdraw.
 ---@param atmlist table The all of ATM coords (Security but optionnal).
 ---@return void
 function ZODWorks.KRPBank:withdrawMoney(amount, atmlist)
     ZODWorks.Game:Trigger("zod::withdrawMoney", amount, atmlist or nil)
+end
+
+--- Get account id XXXX-XXXX-XXXX-XXXX
+--- @return string
+function ZODWorks.KRPBank:getAccountId()
+    if(AccountId ~= nil) then
+        return AccountId
+    else
+        ZODWorks.Game:Trigger("zod::getAccountId")
+
+        while(AccountId == nil) do
+            Wait(0)
+        end
+    
+        return AccountId
+    end
 end
 
 --- Deposit some money from account bank.

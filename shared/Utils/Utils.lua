@@ -62,17 +62,21 @@ end
 ---@param coords2 vector3 Second point.
 ---@return vector3
 function ZODWorks.Utils:getDistanceBetween(coords1, coords2)
-    return #(coords1 - coords2)
+    return Vdist2(coords1.x, coords1.y, coords1.z, coords2.x, coords2.y, coords2.z)
 end
 
 --- Check if an key-element is present in table.
 ---@param t table The table.
 ---@param key any The value.
 ---@return boolean
-function ZODWorks.Utils:tableContainsKey(t, key)
-    for k, _ in pairs(t) do
-        if k == key then
+function ZODWorks.Utils:tableContainsKey(table, key)
+    for k, v in pairs(table) do
+        if(k == key) then
             return true
+        elseif type(v) == "table" then
+            if(ZODWorks.Utils:tableContainsKey(v, key)) then
+                return true
+            end
         end
     end
 
@@ -83,10 +87,14 @@ end
 ---@param t table The table.
 ---@param key any The value.
 ---@return boolean
-function ZODWorks.Utils:tableContainsValue(t, value)
-    for _, v in pairs(t) do
-        if v == value then
+function ZODWorks.Utils:tableContainsValue(table, value)
+    for _, item in ipairs(table) do
+        if(item == value) then
             return true
+        elseif type(item) == "table" then
+            if(ZODWorks.Utils:tableContainsValue(item, value)) then
+                return true
+            end
         end
     end
 

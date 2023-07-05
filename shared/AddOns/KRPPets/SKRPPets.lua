@@ -13,26 +13,36 @@
     LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 ]]--
 
-RegisterNetEvent("zod::getPetsList", function(identifier)
+ESX = exports["es_extended"]:getSharedObject()
+
+RegisterNetEvent("zod::getPetsList", function()
     local _src = source
+    local xPlayer = ESX.GetPlayerFromId(_src)
+    local identifier = xPlayer.identifier
 
     MySQL.Async.fetchAll(
-            "SELECT `pet`, `name` FROM `krp_pets` WHERE identifier=@i", {["i"] = identifier},
-            function(data)
-                if(data) then
-                    TriggerClientEvent("zod:receivePetsList", _src, data)
-                end
-    end)
+        "SELECT `pet`, `name` FROM `krp_pets` WHERE identifier=@i", {
+            ["i"] = identifier
+        },function(data)
+            if(data) then
+                TriggerClientEvent("zod:receivePetsList", _src, data)
+            end
+        end)
 end)
 
-RegisterNetEvent("zod::addPetToPlayer", function(identifier, pet, name)
+RegisterNetEvent("zod::addPetToPlayer", function(pet, name)
     local _src = source
+    local xPlayer = ESX.GetPlayerFromId(_src)
+    local identifier = xPlayer.identifier
 
     MySQL.Async.insert(
-            "INSERT INTO `krp_pets` (identifier, pet, name) VALUES (@i, @p, @n)",
-            {["i"] = identifier, ["p"] = pet, ["n"] = name}, function(id)
-                if(id == 0) then
-                    TriggerClientEvent("zod:petCreated", _src, { pet = pet, name = name })
-                end
-    end)
+        "INSERT INTO `krp_pets` (identifier, pet, name) VALUES (@i, @p, @n)", {
+            ["i"] = identifier, 
+            ["p"] = pet, 
+            ["n"] = name
+        }, function(id)
+            if(id == 0) then
+                TriggerClientEvent("zod:petCreated", _src, { pet = pet, name = name })
+            end
+        end)
 end)

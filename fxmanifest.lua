@@ -2,7 +2,7 @@ fx_version 'adamant'
 game 'gta5'
 
 author "General Zod | Discord: bilaaaaaaaaaal"
-description ""
+description "ZODWorks tool"
 
 client_scripts {
     -- Locales
