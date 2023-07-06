@@ -42,7 +42,6 @@ function ZODWorks.Player:doAnimation(dictionary, name)
 
         local player = PlayerPedId(-1)
         TaskPlayAnim(player, dictionary, name, 8.0, 8.0, 3000, 48, 1, false, false, false)
-        FreezeEntityPosition(player, true)
     end)
 end
 
