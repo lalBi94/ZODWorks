@@ -101,6 +101,7 @@ function ZODWorks.Player:getIndentity()
 end
 
 --- To restructure the ESX.GetAccounts.
+---@return table
 function privateMoneyObjectCreator()
     local ply = ZODWorks.Player:getData().accounts
     local obj = {}
