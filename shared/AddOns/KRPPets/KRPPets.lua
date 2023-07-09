@@ -109,5 +109,3 @@ function ZODWorks.KRPPets:spawnPet(race, name)
     ESX.ShowNotification((Locales.KRPPets.texts.succes[CurrentLocale]):format(name))
     return pet
 end
-
-setmetatable(ZODWorks, {__index, ZODWorks.KRPPets})

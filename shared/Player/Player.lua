@@ -52,20 +52,6 @@ function ZODWorks.Player:stopAnimation()
     FreezeEntityPosition(player, false)
 end
 
---- Get coordonates.
----@param vect4 boolean Return a vector4 value (+heading) OPTIONNAL
----@return vector3, vector4
-function ZODWorks.Player:getCoords(vect4)
-    local coords = GetEntityCoords(PlayerPedId(-1))
-
-    if(vect4) then
-        local h = GetEntityHeading(PlayerPedId(-1))
-        return vector4(coords.x, coords.y, coords.z, h)
-    else
-        return vector3(coords.x, coords.y, coords.z)
-    end
-end
-
 --- Teleport the player in coords.
 ---@param coords vector3 The destination.
 ---@return void
@@ -178,5 +164,3 @@ end
 function ZODWorks.Player:getJob()
     return ZODWorks.Player:getData().job
 end
-
-setmetatable(ZODWorks, {__index, ZODWorks.Player})

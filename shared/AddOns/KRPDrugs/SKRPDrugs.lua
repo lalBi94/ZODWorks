@@ -15,6 +15,9 @@
 
 ESX = exports["es_extended"]:getSharedObject()
 
+--- Check if the player have seed.
+---@param drug table The drug object.
+---@return table
 RegisterNetEvent("zod::haveSeed", function(drug)
     local _src = source
     local xPlayer = ESX.GetPlayerFromId(_src)
@@ -28,6 +31,34 @@ RegisterNetEvent("zod::haveSeed", function(drug)
     end
 end)
 
+--- Check if the player have brut matter.
+---@param drug table The drug object..
+---@id ID of the marker.
+---@return table
+RegisterNetEvent("zod::haveBase", function(drug, id)
+    local _src = source
+    local xPlayer = ESX.GetPlayerFromId(_src)
+    local item = xPlayer.getInventoryItem(drug["Recolt"]["name"])
+    local check = item.count >= 10
+    TriggerClientEvent("zod::receiveHaveBase", _src, { flag = check, miss = (10 - item.count) }, id)
+end)
+
+--- Check if the player have the package matter.
+---@param drug table The drug object.
+---@id ID of the marker.
+---@return table
+RegisterNetEvent("zod::haveTreat", function(drug, id)
+    local _src = source
+    local xPlayer = ESX.GetPlayerFromId(_src)
+    local item = xPlayer.getInventoryItem(drug["Treat"]["name"])
+    local check = item.count >= 1
+
+    TriggerClientEvent("zod::receiveHaveTreat", _src, { flag = check, miss = 1 }, id)
+end)
+
+--- When player recolt his drugs.
+---@param drug table The drug object.
+---@param coords vector3 The coords of the marker.
 RegisterNetEvent("zod::playerRecolt", function(drug, coords)
     local _src = source
     local xPlayer = ESX.GetPlayerFromId(_src)
@@ -36,14 +67,45 @@ RegisterNetEvent("zod::playerRecolt", function(drug, coords)
     if(xPlayer.canCarryItem(drug["Recolt"]["name"], 10)) then
         if(winGrain == 1) then
             xPlayer.addInventoryItem(drug["Seed"]["name"], 1)
-            xPlayer.showNotification(("Une %s ~s~ a survecu !"):format(drug["Seed"]["label"]))
+            xPlayer.showNotification((Locales.Seeds[CurrentLocale]):format(drug["Seed"]["label"]))
         end
 
         xPlayer.addInventoryItem(drug["Recolt"]["name"], 10)
         xPlayer.showNotification(("Vous venez de recuperer x10 %s ~s~!"):format(drug["Recolt"]["label"]))
         TriggerClientEvent("zod::receiveDrugEnd", _src, coords)
     else
-        xPlayer.showNotification(("~r~Vous n'avez pas assez de place dans votre inventaire !"))
+        xPlayer.showNotification((Locales.Inventory.miss[CurrentLocale]))
         TriggerClientEvent("zod::receiveDrugEnd", _src, nil)
     end
+end)
+
+--- When player process his drugs.
+---@param drug table The drug object.
+---@param name vector3 The coords of the marker.
+RegisterNetEvent("zod::playerTreat", function(drug, name)
+    local _src = source
+    local xPlayer = ESX.GetPlayerFromId(_src)
+
+    if(xPlayer.canCarryItem(drug["Treat"]["name"], 5)) then
+        xPlayer.removeInventoryItem(drug["Recolt"]["name"], 10)
+        xPlayer.addInventoryItem(drug["Treat"]["name"], 5)
+        TriggerClientEvent("zod::TreatEnd", _src, name)
+    else
+        xPlayer.showNotification(Locales.Inventory.miss[CurrentLocale])
+    end
+end)
+
+--- When player sell his drugs.
+---@param drug table The drug object.
+---@param id vector3 The coords of the marker.
+---@param price number The drug price/u
+RegisterNetEvent("zod::playerSell", function(drug, id, price)
+    local _src = source
+    local xPlayer = ESX.GetPlayerFromId(_src)
+
+    xPlayer.removeInventoryItem(drug["Treat"]["name"], 1)
+    xPlayer.addAccountMoney("black_money", price)
+
+    xPlayer.showNotification((Locales.Money.add[CurrentLocale]):format(price))
+    TriggerClientEvent("zod::SellEnd", _src, id)
 end)

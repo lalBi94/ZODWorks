@@ -33,6 +33,19 @@ function ZODWorks.Utils:formatCurrency(amount)
     return ("%s$"):format(chain)
 end
 
+--- Get the average of table number value.
+---@param t table The table number.
+---@return number
+function ZODWorks.Utils:averageOf(t)
+    local somme = 0
+
+    for i = 1, #tableau do
+        somme = somme + tableau[i]
+    end
+
+    return somme / #tableau
+end
+
 --- Display a input popup.
 ---@param msg string The title of the popup frame.
 ---@return string
@@ -100,5 +113,3 @@ function ZODWorks.Utils:tableContainsValue(table, value)
 
     return false
 end
-
-setmetatable(ZODWorks, {__index, ZODWorks.Utils})

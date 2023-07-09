@@ -18,8 +18,7 @@ ZODWorks.Game = ZODWorks.Game or {}
 --- Send a help notify to client (in top-left of screen)
 ---@param msg string The message content.
 function ZODWorks.Game:helpNotify(msg)
-    AddTextEntry(msg, msg)
-    DisplayHelpTextThisFrame(msg, false)
+    ESX.ShowHelpNotification(msg, false, false, -1)
 end
 
 --- Redefinition of TriggerServerEvent.
@@ -41,18 +40,7 @@ end
 ---@param size number Font size (OPTIONNAL).
 ---@param center boolean Has to be centered ? (OPTIONNAL).
 function ZODWorks.Game:create3dText(text, coords, color, size, center)
-    SetTextScale(0.35, 0.35)
-    SetTextFont(size or 4)
-    SetTextProportional(1)
-    SetTextColour(color.r or 255, color.g or 255, color.b or 255, color.a or 255)
-    SetTextEntry("STRING")
-    SetTextCentre(center or true)
-    AddTextComponentString(text)
-    SetDrawOrigin(coords.x, coords.y, coords.z, 0)
-    DrawText(0.0, 0.0)
-    local factor = (string.len(text)) / 370
-    DrawRect(0.0, 0.0 + 0.0125, 0.017 + factor, 0.03, 0, 0, 0, 75)
-    ClearDrawOrigin()
+    ESX.Game.Utils.DrawText3D(coords, text, 2.0, 1)
 end
 
 --- Create a marker on the map.
@@ -99,5 +87,3 @@ end
 function ZODWorks.Game:deleteBlip(blip)
     RemoveBlip(blip)
 end
-
-setmetatable(ZODWorks, {__index, ZODWorks.Game})

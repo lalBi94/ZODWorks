@@ -15,7 +15,7 @@
 
 ESX = exports["es_extended"]:getSharedObject()
 
----@class
+---@class ZODWorks
 ---@version 1.0
 ZODWorks = ZODWorks or {}
 
@@ -24,7 +24,5 @@ ZODWorks = ZODWorks or {}
 function ZODWorks:getSharedObject()
     return ZODWorks
 end
-
-setmetatable(ZODWorks, {__index, getSharedObject})
 
 exports("getSharedObject", ZODWorks.getSharedObject)

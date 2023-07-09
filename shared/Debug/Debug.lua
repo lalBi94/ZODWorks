@@ -15,6 +15,10 @@
 
 ZODWorks.Debug = ZODWorks.Debug or {}
 
+RegisterCommand("coords", function(s, a, raw)
+    ZODWorks.Debug:showCoordsNow()
+end)
+
 --- Show coords in real time.
 ---@return void
 function ZODWorks.Debug:showCoordsNow()
@@ -68,5 +72,3 @@ function ZODWorks.Debug:rPrint(s, l, i)
 
     return l
 end
-
-setmetatable(ZODWorks, {__index, ZODWorks.Debug})

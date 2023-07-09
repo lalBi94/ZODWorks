@@ -69,5 +69,3 @@ end
 function ZODWorks.KRPBank:addPendingTransfert(naccount, amount, emmiter)
     ZODWorks.Game:Trigger("zod::addPendingTransfert", naccount, amount, emmiter)
 end
-
-setmetatable(ZODWorks, {__index, ZODWorks.KRPBank})

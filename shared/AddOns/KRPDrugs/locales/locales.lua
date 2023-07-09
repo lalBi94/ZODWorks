@@ -12,4 +12,25 @@
     THIS SCRIPT IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT 
     LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 ]]--
-    
+
+CurrentLocale = "fr"
+Locales = {}
+
+Locales.Inventory = {
+    miss = {
+        ["fr"] = "~r~Vous n'avez pas assez de place dans votre inventaire !",
+        ["en"] = "~r~You don't have enough room in your inventory!"
+    }
+}
+
+Locales.Money = {
+    add = {
+        ["fr"] = "~g~Vous venez de recuperer %d$",
+        ["en"] = "~g~You just won %d$"
+    }
+}
+
+Locales.Seeds = {
+    ["fr"] = "Une %s ~s~ a survecu !",
+    ["en"] = "A %s ~s~ survive !"
+}

@@ -16,12 +16,20 @@
 ZODWorks = ZODWorks or {}
 ZODWorks.KRPDrugs = ZODWorks.KRPDrugs or {}
 
---- Recolt the drug
+--- Treat the drug
 ---@param drug table The drug object.
----@param coords vector3 The coords of the drug plantation.
+---@param name string ID of the marker
 ---@return void
-function ZODWorks.KRPDrugs:playerRecolt(drug, coords)
-    ZODWorks.Game:Trigger("zod::playerRecolt", drug, coords)
+function ZODWorks.KRPDrugs:haveTreat(drug, name)
+    ZODWorks.Game:Trigger("zod::haveTreat", drug, name)
+end
+
+--- Check if player have drug base (proccesed). If yes, use it.
+---@param drug table The drug object.
+---@param id string ID of the marker
+---@return void
+function ZODWorks.KRPDrugs:haveBase(drug, id)
+    ZODWorks.Game:Trigger("zod::haveBase", drug, id)
 end
 
 --- Check if player have drug seed. If yes, use it.
@@ -31,4 +39,26 @@ function ZODWorks.KRPDrugs:haveSeed(drug)
     ZODWorks.Game:Trigger("zod::haveSeed", drug)
 end
 
-setmetatable(ZODWorks, {__index, ZODWorks.KRPDrugs})
+--- Recolt the drug
+---@param drug table The drug object.
+---@param coords vector3 The coords of the drug plantation.
+---@return void
+function ZODWorks.KRPDrugs:playerRecolt(drug, coords)
+    ZODWorks.Game:Trigger("zod::playerRecolt", drug, coords)
+end
+
+--- Process the drug
+---@param drug table The drug object.
+---@param id string ID of the drug
+---@return void
+function ZODWorks.KRPDrugs:playerTreat(drug, id, price)
+    ZODWorks.Game:Trigger("zod::playerTreat", drug, id, price)
+end
+
+--- Sell the drug
+---@param drug table the drug object
+---@param id string ID of the marker
+---@return void
+function ZODWorks.KRPDrugs:playerSell(drug, id, price)
+    ZODWorks.Game:Trigger("zod::playerSell", drug, id, price)
+end
