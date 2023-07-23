@@ -28,17 +28,27 @@ function ZODWorks.Game:Trigger(event, ...)
     TriggerServerEvent(event, ...)
 end
 
---- Redefinition of getClosestObject (no originality yes but 0 ESX import in script)
+--- Redefinition of getClosestObject (no originality yes but 0 ESX import in client side)
 function ZODWorks.Game:getClosestObject()
     return ESX.Game.GetClosestObject()
 end
 
+--- Redefinition of getClosestObject (no originality yes but 0 ESX import in client side)
+---@param dist number? If you want use the distance
+function ZODWorks.Game:getClosestPlayer(dist)
+    local player, distance = ESX.Game.GetClosestObject()
+    if(dist and distance > dist and player ~= -1) then
+        return player
+    else
+        return player
+    end
+end
 --- Create a 3d Text (cannot remove it).
 ---@param text string The showed message.
 ---@param coords vector3 The coordonates.
 ---@param color table RGBA.
----@param size number Font size (OPTIONNAL).
----@param center boolean Has to be centered ? (OPTIONNAL).
+---@param size number? Font size.
+---@param center boolean? Has to be centered ?.
 function ZODWorks.Game:create3dText(text, coords, color, size, center)
     ESX.Game.Utils.DrawText3D(coords, text, 2.0, 1)
 end
@@ -47,8 +57,8 @@ end
 ---@param id number The marker type.
 ---@param coords vector4 The coords of the marker.
 ---@param color table RGBA.
----@param canJump number false = 0, true = 1 (OPTIONNAL).
----@param canRotate number false = 0, true = 1 (OPTIONNAL).
+---@param canJump number? false = 0, true = 1.
+---@param canRotate number? false = 0, true = 1.
 function ZODWorks.Game:createMarker(id, coords, color, canJump, canRotate)
     return DrawMarker(id or 1, coords.x, coords.y, coords.z, 0.0, 0.0, 0.0, 0.0,
             0.0, 0.0, 0.5, 0.5, 0.5, color.r, color.g, color.b, color.a,
