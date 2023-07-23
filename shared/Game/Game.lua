@@ -33,11 +33,11 @@ function ZODWorks.Game:getClosestObject()
     return ESX.Game.GetClosestObject()
 end
 
---- Redefinition of getClosestObject (no originality yes but 0 ESX import in client side)
+--- Redefinition of getClosestPlayer (no originality yes but 0 ESX import in client side)
 ---@param dist number? If you want use the distance
 function ZODWorks.Game:getClosestPlayer(dist)
-    local player, distance = ESX.Game.GetClosestObject()
-    if(dist and distance > dist and player ~= -1) then
+    local player, distance = ESX.Game.GetClosestPlayer()
+    if(dist and distance <= dist and player ~= -1) then
         return player
     else
         return player
