@@ -23,7 +23,7 @@ end
 
 --- Redefinition of TriggerServerEvent.
 ---@param event string Trigger event name.
----@param ... table Arguments
+---@vararg any
 function ZODWorks.Game:Trigger(event, ...)
     TriggerServerEvent(event, ...)
 end
@@ -35,12 +35,17 @@ end
 
 --- Redefinition of getClosestPlayer (no originality yes but 0 ESX import in client side)
 ---@param dist number? If you want use the distance
+---@return number|nil
 function ZODWorks.Game:getClosestPlayer(dist)
     local player, distance = ESX.Game.GetClosestPlayer()
+
     if(dist and distance <= dist and player ~= -1) then
         return player
-    else
+    --- a change pour ~= -1
+    elseif player ~= -1 then
         return player
+    else
+        return nil
     end
 end
 --- Create a 3d Text (cannot remove it).

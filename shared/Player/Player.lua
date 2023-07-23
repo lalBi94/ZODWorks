@@ -17,12 +17,12 @@ ZODWorks.Player = {}
 
 --- Get coordonates.
 ---@param vect4 boolean Return a vector4 value (+heading) OPTIONNAL
----@return vector3, vector4
+---@return vector3|vector4
 function ZODWorks.Player:getCoords(vect4)
-    local coords = GetEntityCoords(PlayerPedId(-1))
+    local coords = GetEntityCoords(PlayerPedId())
 
     if(vect4) then
-        local h = GetEntityHeading(PlayerPedId(-1))
+        local h = GetEntityHeading(PlayerPedId())
         return vector4(coords.x, coords.y, coords.z, h)
     else
         return vector3(coords.x, coords.y, coords.z)
@@ -40,7 +40,7 @@ function ZODWorks.Player:doAnimation(dictionary, name)
             Citizen.Wait(0)
         end
 
-        local player = PlayerPedId(-1)
+        local player = PlayerPedId()
         TaskPlayAnim(player, dictionary, name, 8.0, 8.0, 3000, 48, 1, false, false, false)
     end)
 end
@@ -48,7 +48,7 @@ end
 --- Stop an animation
 ---@return void
 function ZODWorks.Player:stopAnimation()
-    local player = PlayerPedId(-1)
+    local player = PlayerPedId()
     FreezeEntityPosition(player, false)
 end
 
@@ -56,7 +56,7 @@ end
 ---@param coords vector3 The destination.
 ---@return void
 function ZODWorks.Player:teleport(coords)
-    SetEntityCoords(PlayerPedId(-1), coords.x, coords.y, coords.z, 0, 0, 0, false)
+    SetEntityCoords(PlayerPedId(), coords.x, coords.y, coords.z, 0, 0, 0, false)
 end
 
 --- Get the player data.
