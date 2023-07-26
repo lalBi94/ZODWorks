@@ -40,10 +40,10 @@ function ZODWorks.Game:getClosestPlayer(dist)
     local player, distance = ESX.Game.GetClosestPlayer()
 
     if(dist and distance <= dist and player ~= -1) then
-        return player
+        return GetPlayerServerId(player)
     --- a change pour ~= -1
     elseif player ~= -1 then
-        return player
+        return GetPlayerServerId(player)
     else
         return nil
     end
